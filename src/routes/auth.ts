@@ -28,7 +28,7 @@ router.all('/google', (req, res, next) => {
 router.post('/login', async (req: any, res: any) => {
   // Here, you should validate the user account.
   // In this sample, we do not do that.
-  const projectId = `smart-spider-308904`;
+  const projectId = 'smart-spider-308904';
   const {username, password, response_url} = req.body;
   const redirect = querystring.parse(response_url as string);
   let userInfo;

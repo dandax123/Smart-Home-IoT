@@ -39,7 +39,7 @@ export class Fan implements IDevice {
       type,
       traits: ['action.devices.traits.FanSpeed', 'action.devices.traits.OnOff'],
       name: {
-        defaultNames: [`Smart Fan`],
+        defaultNames: ['Smart Fan'],
         name: this.name,
         nicknames: this.nickNames,
       },
