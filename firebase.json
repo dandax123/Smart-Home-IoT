@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "public": "frontend/public",
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\"/.. run test",
       "npm --prefix \"$RESOURCE_DIR\"/.. run build"
