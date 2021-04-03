@@ -1,0 +1,10 @@
+export const ConstApplicationId = 'X-Parse-Application-Id';
+export const ConstRestApiKey = 'X-Parse-REST-API-Key';
+export const ConstRevocableSession = 'X-Parse-Revocable-Session';
+export const ConstInstallationId = 'X-Parse-Installation-Id';
+export const ConstParseSessionToken = 'X-Parse-Session-Token';
+export const ApplicationId = 'myAppId';
+export const ParseServerUrl = 'http://cloud.anser.co.in/parse';
+export const ConstantParseServerLoginUrl = ParseServerUrl + '/login';
+export const ConstantParseServerDeviceUrl = ParseServerUrl + '/classes/Devices';
+export const ConstantParseServerUserUrl = ParseServerUrl + '/classes/Users';
