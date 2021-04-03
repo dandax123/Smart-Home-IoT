@@ -18,7 +18,6 @@ import {
 } from '../constants';
 import {reduce} from 'p-iteration';
 import {SmartHomeV1ExecuteRequestExecution} from 'actions-on-google';
-import {response} from 'express';
 
 const devicesNumber = [1, 2, 3, 4];
 export const _parseHeaders = (
@@ -33,8 +32,7 @@ export const _parseHeaders = (
 };
 
 export const loginUser = async (username: string, password: string) => {
-  const headers = _parseHeaders(ApplicationId);
-  headers[ConstApplicationId] = ApplicationId;
+  const headers = _parseHeaders(ApplicationId as string);
   headers[ConstRevocableSession] = '1';
   const url = ConstantParseServerLoginUrl;
   const {data} = await axios.get(url, {
@@ -50,7 +48,7 @@ export const loginUser = async (username: string, password: string) => {
 export const getUserDevices = async (
   sessionToken: string
 ): Promise<ISyncDevice[]> => {
-  const headers = _parseHeaders(ApplicationId, sessionToken);
+  const headers = _parseHeaders(ApplicationId as string, sessionToken);
   try {
     const {data: parserDevices} = await axios.get(
       ConstantParseServerDeviceUrl,
@@ -106,7 +104,7 @@ export const deviceUpdate = async (
   newValue: number,
   type: 'switch' | 'control'
 ) => {
-  const headers = _parseHeaders(ApplicationId);
+  const headers = _parseHeaders(ApplicationId as string);
   headers[ConstParseSessionToken] = sessionToken;
 
   const url = ConstantParseServerDeviceUrl + `/${objectId}`;
@@ -131,7 +129,7 @@ export const deviceUpdate = async (
   return res;
 };
 const getDeviceStateInfo = async (deviceId: string, sessionToken: string) => {
-  const headers = _parseHeaders(ApplicationId, sessionToken);
+  const headers = _parseHeaders(ApplicationId as string, sessionToken);
   const {pinNumber: pin, objectId, pinAsset} = getDeviceIdInfo(deviceId);
   try {
     const {data} = await axios.get(
@@ -169,7 +167,7 @@ export const updateSingleDevice = async (
 ) => {
   const {pinNumber: pin, objectId} = getDeviceIdInfo(deviceId);
 
-  const headers = _parseHeaders(ApplicationId, sessionToken);
+  const headers = _parseHeaders(ApplicationId as string, sessionToken);
   try {
     const {data} = await axios.get(
       ConstantParseServerDeviceUrl + `/${objectId}`,
