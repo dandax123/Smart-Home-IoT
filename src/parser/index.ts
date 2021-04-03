@@ -1,7 +1,5 @@
 import axios from 'axios';
-import {DeviceTypes, IHeader, IPin, ISyncDevice} from '../utils/types';
-import queryString, {parse} from 'query-string';
-import * as functions from 'firebase-functions';
+import {IHeader, IPin, ISyncDevice} from '../utils/types';
 import {
   categorizeFanSpeed,
   deCategorizeFanSpeed,
@@ -186,7 +184,6 @@ export const updateSingleDevice = async (
       status: 'SUCCESS',
     };
   } catch (err) {
-    functions.logger.error('update-error', err);
     return {
       ids: [deviceId],
       status: 'ERROR',

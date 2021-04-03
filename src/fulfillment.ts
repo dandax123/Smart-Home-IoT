@@ -21,15 +21,12 @@ try {
     fs.readFileSync(path.join(__dirname, 'smart-home-key.json')).toString()
   );
 } catch (e) {
-  functions.logger.warn('error reading service account key:', e);
-  functions.logger.warn('reportState and requestSync operation will fail');
+  console.log('provide the smart key');
 }
 
 export const app = smarthome({
   jwt,
 });
-
-// Array could be of any type
 
 async function getUserIdOrThrow(headers: Headers): Promise<string> {
   const userId = await getUser(headers);
@@ -44,7 +41,6 @@ async function getUserIdOrThrow(headers: Headers): Promise<string> {
 app.onSync(async (body, headers) => {
   const userId = await getUserIdOrThrow(headers);
   const devices: any = await getUserDevices(userId);
-  functions.logger.error('devices:', devices);
   const syncResponse = {
     requestId: body.requestId,
     payload: {
@@ -56,9 +52,7 @@ app.onSync(async (body, headers) => {
 });
 
 app.onQuery(async (body, headers) => {
-  functions.logger.debug('QueryRequest:', body);
   const userId = await getUser(headers);
-  // const deviceStates: DeviceStatesMap = {};
   const {devices} = body.inputs[0].payload;
   const devicesIds = devices.map(dev => dev.id);
   const deviceState = await getDeviceState(userId, devicesIds);
@@ -69,14 +63,11 @@ app.onQuery(async (body, headers) => {
       devices: deviceState,
     },
   };
-  functions.logger.error('QueryResponse:', queryResponse);
   return queryResponse;
 });
 
 app.onExecute(async (body, headers) => {
-  functions.logger.debug('ExecuteRequest:', body);
   const userId = await getUserIdOrThrow(headers);
-  // const commands:  = [];
 
   const {devices, execution} = body.inputs[0].payload.commands[0];
   const commands: SmartHomeV1ExecuteResponseCommands[] = await map(
@@ -97,15 +88,12 @@ app.onExecute(async (body, headers) => {
       commands,
     },
   };
-  functions.logger.debug('ExecuteResponse:', executeResponse);
   return executeResponse;
 });
 
 app.onDisconnect(async (body, headers) => {
-  functions.logger.debug('DisconnectRequest:', body);
   const userId = await getUserIdOrThrow(headers);
   const disconnectResponse = {};
-  functions.logger.debug('DisconnectResponse:', disconnectResponse);
   return disconnectResponse;
 });
 

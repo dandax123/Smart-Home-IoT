@@ -11,10 +11,6 @@
         "function": "fulfillment"
       },
       {
-        "source": "/smarthome/@(create|update|delete)",
-        "function": "deviceManager"
-      },
-      {
         "source": "/@(fakeauth|login|faketoken)",
         "function": "authProvider"
       }

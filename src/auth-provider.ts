@@ -22,5 +22,5 @@ app.use('/login.css', (_, res) =>
   res.sendFile(path.join(__dirname, '/public/login/login.css'))
 );
 app.use('/auth', authRouter);
-// app.use('/smart-spider-308904/us-central1', authRouter);
+
 export const authProvider = functions.https.onRequest(app);
