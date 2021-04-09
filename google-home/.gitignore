@@ -42,9 +42,9 @@ node_modules/
 jspm_packages/
 build/
 src/smart-home-key.json
-alexamain/node_modules/
-alexamain/setup.txt
-alexamain/alexa.zip
+../alexamain/node_modules/
+../alexamain/setup.txt
+../alexamain/alexa.zip
 # TypeScript v1 declaration files
 typings/
 
