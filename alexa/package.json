@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "p-iteration": "^1.1.8",
     "uuid": "^8.3.2"
   },

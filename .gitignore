@@ -38,10 +38,10 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+google-home/node_modules/
 jspm_packages/
 build/
-src/smart-home-key.json
+google-home/smart-home-key.json
 alexa/node_modules/
 alexa/setup.txt
 alexa/alexa.zip
@@ -74,6 +74,7 @@ typings/
 
 # dotenv environment variables file
 .env
+alexa/.env
 .env.test
 
 src/smart-home-key.json

@@ -1,10 +1,12 @@
+const { config } = require("dotenv");
+config();
 exports.ConstApplicationId = "X-Parse-Application-Id";
 exports.ConstRestApiKey = "X-Parse-REST-API-Key";
 exports.ConstRevocableSession = "X-Parse-Revocable-Session";
 exports.ConstInstallationId = "X-Parse-Installation-Id";
 exports.ConstParseSessionToken = "X-Parse-Session-Token";
-exports.ApplicationId = "myAppId";
-const ParseServerUrl = "http://cloud.anser.co.in/parse";
+exports.ApplicationId = process.env.PARSE_SERVER_APPLICATION_ID;
+const ParseServerUrl = process.env.PARSE_SERVER_URL;
 exports.ConstantParseServerLoginUrl = ParseServerUrl + "/login";
 exports.ConstantParseServerDeviceUrl = ParseServerUrl + "/classes/Devices";
 exports.ConstantParseServerUserUrl = ParseServerUrl + "/classes/Users";

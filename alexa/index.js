@@ -82,10 +82,10 @@ exports.handler = async function (event, context) {
     adr.addContextProperty({
       namespace: "Alexa.PowerController",
       name: "powerState",
-      value: Boolean(deviceState.value) ? "ON" : "FALSE",
+      value: Boolean(Number(deviceState.value)) ? "ON" : "OFF",
     });
     if (pinAsset == 2 && deviceState.type == "control") {
-      ar.addContextProperty({
+      adr.addContextProperty({
         namespace: "Alexa.BrightnessController",
         name: "brightness",
         value: deviceState.value,
@@ -171,7 +171,7 @@ exports.handler = async function (event, context) {
     }
   }
 
-  if (namespace.toLowerCase() == "alexa.percentageontroller") {
+  if (namespace.toLowerCase() == "alexa.percentagecontroller") {
     try {
       const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
       let { percentage } = event.directive.payload;
@@ -220,7 +220,7 @@ exports.handler = async function (event, context) {
         name: "powerState",
         value: power_state_value ? "ON" : "FALSE",
       });
-      await deviceUpdate(userId, deviceId, Number(power_state_value));
+      await deviceUpdate(userId, deviceId, Number(power_state_value) * 100);
       return sendResponse(ar.get());
     } catch (err) {
       return new AlexaResponse({
@@ -231,21 +231,12 @@ exports.handler = async function (event, context) {
         },
       }).get();
     }
-    // Check for an error when setting the state
-    // let state_set = sendDeviceState(
-    //   endpoint_id,
-    //   "powerState",
-    //   power_state_value
-    // );
-    // if (!state_set) {
-
-    // }
   }
 };
 
 function sendResponse(response) {
   // TODO Validate the response
-  console.log("index.handler event response -----");
-  console.log(JSON.stringify(response));
+  // console.log("index.handler event response -----");
+  // console.log(JSON.stringify(response));
   return response;
 }
