@@ -1,0 +1,14 @@
+{
+  "name": "alexa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "p-iteration": "^1.1.8",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "re-zip": "rm -r -f alexa.zip && zip -r alexa.zip ."
+  }
+}

@@ -1,0 +1,65 @@
+<style>
+  body {
+    background-color: #f1f1f1 !important;
+  }
+  .form-holder {
+    margin-top: 20%;
+    margin-bottom: 20%;
+  }
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card form-holder">
+        <div class="card-body">
+          <h1>Login</h1>
+          <form
+            action="https://us-central1-smart-spider-308904.cloudfunctions.net/authProvider/auth/login"
+            method="post"
+          >
+            <div class="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Username"
+              />
+            </div>
+            <input
+              type="hidden"
+              name="state"
+              value="{{ state }}"
+              class="form-control"
+              placeholder="Username"
+            />
+            <input
+              type="hidden"
+              name="isGoogle"
+              value="{{ isGoogle }}"
+              class="form-control"
+              placeholder="Username"
+            />
+            <div class="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Password"
+              />
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <div class="col-8 text-left">
+                <a href="#" class="btn btn-link">Forgot Password</a>
+              </div>
+              <div class="col-4 text-right">
+                <input type="submit" class="btn btn-primary" value=" Login " />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
