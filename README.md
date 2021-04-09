@@ -1,5 +1,5 @@
 # Smart-Home-IoT
-Handle intents for third party IoT integration in Alexa and Google-home
+Handle smart-home intents for third-party IoT integration in Alexa and Google-home
 
 References: <br />
 Google-Home: [https://developers.google.com/assistant/smarthome/overview](https://developers.google.com/assistant/smarthome/overview) <br />
