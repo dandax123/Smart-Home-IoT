@@ -25,7 +25,8 @@ router.post('/login', async (req: any, res: any) => {
     if (user) {
       return res.redirect(
         isGoogle === 'google'
-          ? `${googleRedirectUrl + projectId}`
+          ? `${googleRedirectUrl + projectId}` +
+              `?code=${user.sessionToken}&state=${state}`
           : `${alexaRedirectUrl}` + `?code=${user.sessionToken}&state=${state}`
       );
     }

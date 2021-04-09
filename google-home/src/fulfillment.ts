@@ -78,6 +78,24 @@ app.onExecute(async (body, headers) => {
         device.id,
         execution[0]
       );
+      try {
+        const reportStateRequest = {
+          agentUserId: userId,
+          requestId: Math.random().toString(),
+          payload: {
+            devices: {
+              states: {
+                [device.id]: newUpdate.states,
+              },
+            },
+          },
+        };
+        const reportStateResponse = JSON.parse(
+          await app.reportState(reportStateRequest)
+        );
+      } catch (e) {
+        //cooll
+      }
       return newUpdate;
     }
   );
