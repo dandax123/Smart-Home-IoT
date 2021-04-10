@@ -140,10 +140,10 @@ exports.handler = async function (event, context) {
     return sendResponse(adr.get());
   }
   if (namespace.toLowerCase() == "alexa.brightnesscontroller") {
+    const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
     const deviceState = await getDeviceState(userId, deviceId);
     let newBrightness = deviceState.value;
     try {
-      const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
       if ("brightness" in event.directive.payload) {
         let { brightness } = event.directive.payload;
         newBrightness = brightness;
@@ -181,10 +181,10 @@ exports.handler = async function (event, context) {
   }
 
   if (namespace.toLowerCase() == "alexa.percentagecontroller") {
+    const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
     try {
       const deviceState = await getDeviceState(userId, deviceId);
       let newPercent = deviceState.value;
-      const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
       if ("percentage" in event.directive.payload) {
         let { percentage } = event.directive.payload;
         newPercent = percentage;
