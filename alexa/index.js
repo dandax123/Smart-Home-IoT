@@ -140,10 +140,19 @@ exports.handler = async function (event, context) {
     return sendResponse(adr.get());
   }
   if (namespace.toLowerCase() == "alexa.brightnesscontroller") {
+    const deviceState = await getDeviceState(userId, deviceId);
+    let newBrightness = deviceState.value;
     try {
       const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
-      let { brightness } = event.directive.payload;
-      await deviceUpdate(userId, deviceId, brightness);
+      if ("brightness" in event.directive.payload) {
+        let { brightness } = event.directive.payload;
+        newBrightness = brightness;
+        await deviceUpdate(userId, deviceId, brightness);
+      } else if ("brightnessDelta" in event.directive.payload) {
+        let { brightnessDelta } = event.directive.payload;
+        newBrightness = Math.max(0, newBrightness + brightnessDelta);
+        await deviceUpdate(userId, deviceId, Math.max(0, newBrightness));
+      }
       let ar = new AlexaResponse({
         correlationToken: correlationToken,
         token: userId,
@@ -152,12 +161,12 @@ exports.handler = async function (event, context) {
       ar.addContextProperty({
         namespace: "Alexa.PowerController",
         name: "powerState",
-        value: Boolean(brightness) ? "ON" : "FALSE",
+        value: Boolean(newBrightness) ? "ON" : "FALSE",
       });
       ar.addContextProperty({
         namespace: "Alexa.BrightnessController",
         name: "brightness",
-        value: brightness,
+        value: newBrightness,
       });
       return sendResponse(ar.get());
     } catch (err) {
@@ -173,9 +182,18 @@ exports.handler = async function (event, context) {
 
   if (namespace.toLowerCase() == "alexa.percentagecontroller") {
     try {
+      const deviceState = await getDeviceState(userId, deviceId);
+      let newPercent = deviceState.value;
       const { deviceId, userId, correlationToken } = extractUsefulTokens(event);
-      let { percentage } = event.directive.payload;
-      await deviceUpdate(userId, deviceId, percentage);
+      if ("percentage" in event.directive.payload) {
+        let { percentage } = event.directive.payload;
+        newPercent = percentage;
+        await deviceUpdate(userId, deviceId, percentage);
+      } else if ("percentageDelta" in event.directive.payload) {
+        let { percentageDelta } = event.directive.payload;
+        newPercent = Math.max(0, newPercent + percentageDelta);
+        await deviceUpdate(userId, deviceId, Math.max(0, newPercent));
+      }
       let ar = new AlexaResponse({
         correlationToken: correlationToken,
         token: userId,
@@ -184,12 +202,12 @@ exports.handler = async function (event, context) {
       ar.addContextProperty({
         namespace: "Alexa.PowerController",
         name: "powerState",
-        value: Boolean(percentage) ? "ON" : "FALSE",
+        value: Boolean(newPercent) ? "ON" : "FALSE",
       });
       ar.addContextProperty({
         namespace: "Alexa.PercentageController",
         name: "percentage",
-        value: percentage,
+        value: newPercent,
       });
       return sendResponse(ar.get());
     } catch (err) {
