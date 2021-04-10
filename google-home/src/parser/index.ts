@@ -126,7 +126,10 @@ export const deviceUpdate = async (
   }
   return res;
 };
-const getDeviceStateInfo = async (deviceId: string, sessionToken: string) => {
+export const getDeviceStateInfo = async (
+  deviceId: string,
+  sessionToken: string
+) => {
   const headers = _parseHeaders(ApplicationId as string, sessionToken);
   const {pinNumber: pin, objectId, pinAsset} = getDeviceIdInfo(deviceId);
   try {

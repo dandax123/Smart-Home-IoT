@@ -3,6 +3,7 @@ import path from 'path';
 import {
   executeDeviceUpdate,
   getDeviceState,
+  getDeviceStateInfo,
   getUserDevices,
 } from './parser/index';
 import {
@@ -85,7 +86,7 @@ app.onExecute(async (body, headers) => {
           payload: {
             devices: {
               states: {
-                [device.id]: newUpdate.states,
+                [device.id]: await getDeviceStateInfo(device.id, userId),
               },
             },
           },
