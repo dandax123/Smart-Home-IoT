@@ -7,19 +7,20 @@ import {loginUser} from '../parser';
 
 router.all('/google', (req, res, _) => {
   const state = req.query.state;
-  res.render('auth/login', {state: `${state}`, authType: `google`});
+  res.render('auth/login', {state: `${state}`, authType: 'google'});
 });
 
 router.all('/link', (req, res, _) => {
   const {state} = req.query;
-  res.render('auth/login', {state: `${state}`, authType: `alexa`});
+  res.render('auth/login', {state: `${state}`, authType: 'alexa'});
 });
 
 router.post('/login', async (req: any, res: any) => {
   const projectId = process.env.PROJECT_ID as string;
   const {username, password, state, isGoogle} = req.body;
-  const googleRedirectUrl = `https://oauth-redirect.googleusercontent.com/r/`;
-  const alexaRedirectUrl = `https://alexa.amazon.co.jp/api/skill/link/M2L1ZIZPRDU3XH`;
+  const googleRedirectUrl = 'https://oauth-redirect.googleusercontent.com/r/';
+  const alexaRedirectUrl =
+    'https://alexa.amazon.co.jp/api/skill/link/M2L1ZIZPRDU3XH';
   try {
     const user = await loginUser(username, password);
     if (user) {
