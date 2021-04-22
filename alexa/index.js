@@ -119,6 +119,7 @@ exports.handler = async function (event, context) {
         if (extraAbilties) {
           adr.addPayloadEndpoint({
             friendlyName: `${device.pin_name}`,
+            description: `${device.pin_name} for the ${data.roomName}`,
             endpointId: createDeviceId(data.objectId, i, pinAsset),
             capabilities: [
               capability_alexa,
@@ -130,6 +131,7 @@ exports.handler = async function (event, context) {
         } else {
           adr.addPayloadEndpoint({
             friendlyName: `${device.pin_name}`,
+            description: `${device.pin_name} for the ${data.roomName}`,
             endpointId: createDeviceId(data.objectId, i, pinAsset),
             capabilities: [capability_alexa, capability_powerController],
             displayCategories: mapToDisplayCategory(pinAsset),

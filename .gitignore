@@ -41,7 +41,7 @@ build/Release
 google-home/node_modules/
 jspm_packages/
 build/
-google-home/smart-home-key.json
+google-home/src/smart-home-key.json
 alexa/node_modules/
 alexa/setup.txt
 alexa/alexa.zip
