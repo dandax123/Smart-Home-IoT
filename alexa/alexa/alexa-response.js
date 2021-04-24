@@ -110,7 +110,7 @@ class AlexaResponse {
       capabilities: this.checkValue(opts.capabilities, []),
       description: this.checkValue(
         opts.description,
-        "Sample Endpoint Description"
+        "AIM IO Endpoint"
       ),
       displayCategories: this.checkValue(opts.displayCategories, ["OTHER"]),
       endpointId: this.checkValue(opts.endpointId, "endpoint-001"),
@@ -118,7 +118,7 @@ class AlexaResponse {
       friendlyName: this.checkValue(opts.friendlyName, "Sample Endpoint"),
       manufacturerName: this.checkValue(
         opts.manufacturerName,
-        "Sample Manufacturer"
+        "Anser Indicus Microsystems"
       ),
     };
 
